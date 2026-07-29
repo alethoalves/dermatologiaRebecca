@@ -1,0 +1,11 @@
+@use '@/styles/mixins' as m;
+
+.section {
+  @include m.section-padding;
+  background: var(--color-bg-base);
+  color: var(--color-ink);
+}
+
+.heading {
+  margin-bottom: var(--space-7);
+}

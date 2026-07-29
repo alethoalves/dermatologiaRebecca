@@ -1,0 +1,21 @@
+@use '@/styles/breakpoints' as bp;
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--color-bg-base);
+
+  @include bp.respond(bp.$bp-lg) {
+    flex-direction: row;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-6) var(--space-5);
+
+  @include bp.respond(bp.$bp-lg) {
+    padding: var(--space-8);
+  }
+}

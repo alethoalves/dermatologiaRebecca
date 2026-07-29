@@ -1,0 +1,35 @@
+@use '@/styles/breakpoints' as bp;
+@use '@/styles/mixins' as m;
+
+.hero {
+  background: var(--gradient-brand);
+  color: var(--color-ink);
+  padding-block: var(--space-8) var(--space-7);
+}
+
+.section {
+  @include m.section-padding;
+  background: var(--color-bg-base);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+
+  @include bp.respond(bp.$bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-ink-soft);
+  padding: var(--space-9) 0;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
