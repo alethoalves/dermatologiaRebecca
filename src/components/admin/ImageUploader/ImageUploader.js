@@ -45,7 +45,7 @@ export default function ImageUploader({ value, onChange }) {
       ) : (
         <button type="button" className={styles.dropzone} onClick={() => inputRef.current?.click()} disabled={isUploading}>
           <ImagePlus size={22} strokeWidth={1.5} />
-          {isUploading ? 'Enviando…' : 'Clique para enviar a imagem de capa (JPG, PNG ou WEBP, até 5MB)'}
+          {isUploading ? 'Enviando…' : 'Clique para enviar a imagem de capa (JPG, PNG ou WEBP, até 15MB)'}
         </button>
       )}
 

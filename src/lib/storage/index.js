@@ -10,7 +10,7 @@ const ALLOWED_MIME_TO_EXT = {
   'image/webp': 'webp',
 };
 
-const MAX_SIZE_BYTES = 5 * 1024 * 1024;
+const MAX_SIZE_BYTES = 15 * 1024 * 1024;
 
 function getDriver() {
   const name = process.env.STORAGE_DRIVER || 'local';
@@ -25,7 +25,7 @@ export async function uploadImage(file, { folder = 'posts' } = {}) {
     throw new Error('Tipo de imagem não suportado. Envie um arquivo JPG, PNG ou WEBP.');
   }
   if (file.size > MAX_SIZE_BYTES) {
-    throw new Error('A imagem excede o tamanho máximo de 5MB.');
+    throw new Error('A imagem excede o tamanho máximo de 15MB.');
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
