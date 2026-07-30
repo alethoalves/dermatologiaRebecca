@@ -21,8 +21,13 @@
   }
 }
 
-.logo {
-  width: 190px;
+.logoLink {
+  display: block;
+  width: 168px;
+
+  @include bp.respond(bp.$bp-md) {
+    width: 200px;
+  }
 }
 
 .nav {

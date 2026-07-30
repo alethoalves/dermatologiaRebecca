@@ -19,7 +19,9 @@ export default function Footer() {
     <footer className={styles.footer}>
       <Container>
         <div className={styles.top}>
-          <Logo type="horizontal" tone="cream" height={38} className={styles.logo} />
+          <Link href="/" className={styles.logoLink}>
+            <Logo type="horizontal" tone="cream" height={38} />
+          </Link>
           <nav className={styles.nav} aria-label="Navegação do rodapé">
             {NAV_LINKS.map((link) => (
               <Link key={link.href} href={link.href} className={styles.navLink}>
