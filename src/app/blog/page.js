@@ -28,7 +28,7 @@ export default async function BlogPage({ searchParams }) {
         <section className={styles.hero}>
           <Container>
             <Reveal>
-              <SectionHeading kicker="Blog" title="Conteúdo sobre saúde e cuidado da pele" highlight="pele" />
+              <SectionHeading kicker="Blog" title="Saúde e cuidado da pele" highlight="pele" />
             </Reveal>
           </Container>
         </section>
