@@ -12,7 +12,7 @@ export default function BlogTeaser({ posts = [] }) {
     <section className={styles.section}>
       <Container>
         <Reveal className={styles.top}>
-          <SectionHeading kicker="Blog" title="Conteúdo sobre saúde e cuidado da pele" highlight="pele" />
+          <SectionHeading kicker="Blog" title="Saúde e cuidado da pele" highlight="pele" />
           <Button href="/blog" variant="outline">
             Ver todos os posts
           </Button>
