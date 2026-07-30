@@ -1,6 +1,7 @@
 // Config "leve", sem acesso a banco — precisa rodar no Edge runtime do middleware.
 // A config completa (com o Credentials provider e acesso ao Prisma) fica em src/auth.js.
 const authConfig = {
+  trustHost: true,
   providers: [],
   pages: {
     signIn: '/admin/login',
