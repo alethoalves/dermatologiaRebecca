@@ -9,7 +9,7 @@ import Location from '@/components/landing/Location/Location';
 import Footer from '@/components/landing/Footer/Footer';
 import { getLatestPublishedPosts } from '@/lib/posts';
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const posts = await getLatestPublishedPosts(3);
