@@ -20,7 +20,7 @@ export default function Hero() {
               forma especializada e com segurança médica.
             </p>
             <div className={styles.actions}>
-              <WhatsAppButton variant="primary">Agendar sua consulta particular</WhatsAppButton>
+              <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
             </div>
             <span className={styles.tag}>
               <MapPin size={16} strokeWidth={1.5} />
