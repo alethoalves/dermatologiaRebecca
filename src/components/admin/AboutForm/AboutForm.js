@@ -1,0 +1,148 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Button from '@/components/ui/Button/Button';
+import ImageUploader from '@/components/admin/ImageUploader/ImageUploader';
+import CredentialsManager from '@/components/admin/CredentialsManager/CredentialsManager';
+import styles from './AboutForm.module.scss';
+
+export default function AboutForm({ about, credentials }) {
+  const router = useRouter();
+
+  const [kicker, setKicker] = useState(about?.kicker || '');
+  const [name, setName] = useState(about?.name || '');
+  const [intro, setIntro] = useState(about?.intro || '');
+  const [paragraphs, setParagraphs] = useState(about?.paragraphs || '');
+  const [photoUrl, setPhotoUrl] = useState(about?.photoUrl || null);
+  const [photoAlt, setPhotoAlt] = useState(about?.photoAlt || '');
+  const [error, setError] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  async function handleSave() {
+    setError(null);
+    setSaved(false);
+
+    if (!name.trim()) {
+      setError('Informe o nome exibido na seção.');
+      return;
+    }
+    if (!intro.trim()) {
+      setError('Escreva o parágrafo de introdução.');
+      return;
+    }
+
+    setIsSaving(true);
+    const payload = { kicker, name, intro, paragraphs, photoUrl, photoAlt };
+
+    try {
+      const res = await fetch('/api/admin/about', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Falha ao salvar a seção Sobre');
+
+      setSaved(true);
+      router.refresh();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  return (
+    <div className={styles.form}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Sobre</h1>
+        <div className={styles.actions}>
+          <Button disabled={isSaving} onClick={handleSave}>
+            {isSaving ? 'Salvando…' : 'Salvar alterações'}
+          </Button>
+        </div>
+      </div>
+
+      {error && <p className={styles.error}>{error}</p>}
+      {saved && !error && <p className={styles.success}>Alterações salvas.</p>}
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="kicker">
+          Kicker
+        </label>
+        <input
+          id="kicker"
+          className={styles.input}
+          value={kicker}
+          onChange={(e) => setKicker(e.target.value)}
+          placeholder="Sobre a"
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="name">
+          Nome
+        </label>
+        <input
+          id="name"
+          className={styles.input}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Dra. Rebecca Amorim"
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>Foto</label>
+        <ImageUploader value={photoUrl} onChange={setPhotoUrl} folder="about" label="Clique para enviar a foto (JPG, PNG ou WEBP, até 15MB)" />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="photoAlt">
+          Texto alternativo da foto
+        </label>
+        <input
+          id="photoAlt"
+          className={styles.input}
+          value={photoAlt}
+          onChange={(e) => setPhotoAlt(e.target.value)}
+          placeholder="Dra. Rebecca Amorim no consultório"
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="intro">
+          Parágrafo de introdução
+        </label>
+        <textarea
+          id="intro"
+          className={styles.textarea}
+          value={intro}
+          onChange={(e) => setIntro(e.target.value)}
+          placeholder="Olá, muito prazer!..."
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="paragraphs">
+          Demais parágrafos
+        </label>
+        <textarea
+          id="paragraphs"
+          className={styles.textareaLarge}
+          value={paragraphs}
+          onChange={(e) => setParagraphs(e.target.value)}
+          placeholder="Escreva cada parágrafo separado por uma linha em branco"
+        />
+        <span className={styles.hint}>Separe cada parágrafo com uma linha em branco.</span>
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label}>Credenciais</label>
+        <CredentialsManager credentials={credentials} />
+      </div>
+    </div>
+  );
+}

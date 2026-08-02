@@ -14,7 +14,7 @@ export default async function Faq() {
     <section id="duvidas" className={styles.section}>
       <Container>
         <Reveal>
-          <SectionHeading kicker="Dúvidas frequentes" title="Perguntas que recebemos com frequência" className={styles.heading} />
+          <SectionHeading kicker="FAQ" title="Dúvidas frequentes" className={styles.heading} />
         </Reveal>
         <Reveal delay={0.1}>
           <Accordion items={items.map((item) => ({ id: item.id, title: item.question, content: item.answer }))} />
