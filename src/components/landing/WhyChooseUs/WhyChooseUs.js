@@ -35,8 +35,11 @@ export default function WhyChooseUs() {
         <Reveal>
           <SectionHeading
             kicker="Cuidado dermatológico completo"
-            title="Por que escolher a Dra. Rebecca?"
-            highlight="completo"
+            title={
+              <>
+                Por que escolher a <br /> Dra. Rebecca?
+              </>
+            }
             className={styles.heading}
           />
         </Reveal>

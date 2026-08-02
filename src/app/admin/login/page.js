@@ -1,7 +1,7 @@
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
-import Logo from '@/components/ui/Logo/Logo';
+import LogoHorizontalMark from '@/components/ui/Logo/LogoHorizontalMark';
 import Button from '@/components/ui/Button/Button';
 import styles from './page.module.scss';
 
@@ -30,7 +30,7 @@ export default async function AdminLoginPage({ searchParams }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.card}>
-        <Logo type="horizontal" tone="ink" height={32} className={styles.logo} />
+        <LogoHorizontalMark className={styles.logo} />
         <h1 className={styles.title}>Painel administrativo</h1>
 
         {hasError && <p className={styles.error}>E-mail ou senha incorretos.</p>}
