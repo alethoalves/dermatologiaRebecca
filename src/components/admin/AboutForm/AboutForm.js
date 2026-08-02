@@ -19,7 +19,9 @@ export default function AboutForm({ about, credentials }) {
   const [crm, setCrm] = useState(about?.crm || '');
   const [rqe, setRqe] = useState(about?.rqe || '');
   const [instagramUrl, setInstagramUrl] = useState(about?.instagramUrl || '');
+  const [instagramLabel, setInstagramLabel] = useState(about?.instagramLabel || '');
   const [lattesUrl, setLattesUrl] = useState(about?.lattesUrl || '');
+  const [lattesLabel, setLattesLabel] = useState(about?.lattesLabel || '');
   const [error, setError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -38,7 +40,20 @@ export default function AboutForm({ about, credentials }) {
     }
 
     setIsSaving(true);
-    const payload = { kicker, name, intro, paragraphs, photoUrl, photoAlt, crm, rqe, instagramUrl, lattesUrl };
+    const payload = {
+      kicker,
+      name,
+      intro,
+      paragraphs,
+      photoUrl,
+      photoAlt,
+      crm,
+      rqe,
+      instagramUrl,
+      instagramLabel,
+      lattesUrl,
+      lattesLabel,
+    };
 
     try {
       const res = await fetch('/api/admin/about', {
@@ -176,6 +191,19 @@ export default function AboutForm({ about, credentials }) {
       </div>
 
       <div className={styles.field}>
+        <label className={styles.label} htmlFor="instagramLabel">
+          Texto do botão do Instagram
+        </label>
+        <input
+          id="instagramLabel"
+          className={styles.input}
+          value={instagramLabel}
+          onChange={(e) => setInstagramLabel(e.target.value)}
+          placeholder="Conheça meu perfil"
+        />
+      </div>
+
+      <div className={styles.field}>
         <label className={styles.label} htmlFor="lattesUrl">
           Currículo Lattes
         </label>
@@ -185,6 +213,19 @@ export default function AboutForm({ about, credentials }) {
           value={lattesUrl}
           onChange={(e) => setLattesUrl(e.target.value)}
           placeholder="http://lattes.cnpq.br/..."
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="lattesLabel">
+          Texto do botão do Lattes
+        </label>
+        <input
+          id="lattesLabel"
+          className={styles.input}
+          value={lattesLabel}
+          onChange={(e) => setLattesLabel(e.target.value)}
+          placeholder="Conheça meu perfil"
         />
       </div>
     </div>

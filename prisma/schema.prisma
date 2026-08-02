@@ -87,18 +87,20 @@ model FaqItem {
 }
 
 model AboutContent {
-  id           String   @id @default("about")
-  kicker       String   @default("Sobre a")
-  name         String   @default("Dra. Rebecca Amorim")
-  intro        String   @db.Text
-  paragraphs   String   @db.Text
-  photoUrl     String?
-  photoAlt     String?
-  crm          String?
-  rqe          String?
-  instagramUrl String?
-  lattesUrl    String?
-  updatedAt    DateTime @updatedAt
+  id             String   @id @default("about")
+  kicker         String   @default("Sobre a")
+  name           String   @default("Dra. Rebecca Amorim")
+  intro          String   @db.Text
+  paragraphs     String   @db.Text
+  photoUrl       String?
+  photoAlt       String?
+  crm            String?
+  rqe            String?
+  instagramUrl   String?
+  instagramLabel String?
+  lattesUrl      String?
+  lattesLabel    String?
+  updatedAt      DateTime @updatedAt
 }
 
 model Credential {

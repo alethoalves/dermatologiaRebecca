@@ -76,16 +76,7 @@
 
 .socialLinks {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
-}
-
-.socialLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-ink-soft);
-
-  &:hover {
-    color: var(--color-brand-deep);
-  }
+  margin-top: var(--space-2);
 }

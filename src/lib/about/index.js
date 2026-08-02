@@ -2,6 +2,8 @@ import { db } from '@/lib/db';
 
 const SINGLETON_ID = 'about';
 
+export const DEFAULT_SOCIAL_LABEL = 'Conheça meu perfil';
+
 const DEFAULTS = {
   kicker: 'Sobre a',
   name: 'Dra. Rebecca Amorim',
@@ -18,7 +20,9 @@ const DEFAULTS = {
   crm: null,
   rqe: null,
   instagramUrl: null,
+  instagramLabel: null,
   lattesUrl: null,
+  lattesLabel: null,
 };
 
 export async function getAboutContent() {
@@ -37,9 +41,24 @@ export async function updateAboutContent({
   crm,
   rqe,
   instagramUrl,
+  instagramLabel,
   lattesUrl,
+  lattesLabel,
 }) {
-  const data = { kicker, name, intro, paragraphs, photoUrl, photoAlt, crm, rqe, instagramUrl, lattesUrl };
+  const data = {
+    kicker,
+    name,
+    intro,
+    paragraphs,
+    photoUrl,
+    photoAlt,
+    crm,
+    rqe,
+    instagramUrl,
+    instagramLabel,
+    lattesUrl,
+    lattesLabel,
+  };
   return db.aboutContent.upsert({
     where: { id: SINGLETON_ID },
     update: data,

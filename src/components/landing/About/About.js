@@ -2,9 +2,10 @@ import Image from 'next/image';
 import { GraduationCap } from 'lucide-react';
 import Container from '@/components/ui/Container/Container';
 import SectionHeading from '@/components/ui/SectionHeading/SectionHeading';
+import Button from '@/components/ui/Button/Button';
 import Reveal from '@/components/motion/Reveal/Reveal';
 import Instagram from '@/components/icons/Instagram';
-import { getAboutContent, splitParagraphs } from '@/lib/about';
+import { getAboutContent, splitParagraphs, DEFAULT_SOCIAL_LABEL } from '@/lib/about';
 import { getAllCredentials } from '@/lib/credentials';
 import styles from './About.module.scss';
 
@@ -49,26 +50,16 @@ export default async function About() {
             {hasSocialLinks && (
               <div className={styles.socialLinks}>
                 {about.instagramUrl && (
-                  <a
-                    href={about.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialLink}
-                    aria-label="Instagram"
-                  >
-                    <Instagram size={20} />
-                  </a>
+                  <Button href={about.instagramUrl} variant="outline">
+                    <Instagram size={18} />
+                    {about.instagramLabel || DEFAULT_SOCIAL_LABEL}
+                  </Button>
                 )}
                 {about.lattesUrl && (
-                  <a
-                    href={about.lattesUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.socialLink}
-                    aria-label="Currículo Lattes"
-                  >
-                    <GraduationCap size={20} strokeWidth={1.5} />
-                  </a>
+                  <Button href={about.lattesUrl} variant="outline">
+                    <GraduationCap size={18} strokeWidth={1.5} />
+                    {about.lattesLabel || DEFAULT_SOCIAL_LABEL}
+                  </Button>
                 )}
               </div>
             )}

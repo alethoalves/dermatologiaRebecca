@@ -16,16 +16,22 @@ function formatCities(clinics) {
   return `${cities.slice(0, -1).join(', ')} e ${cities[cities.length - 1]}`;
 }
 
+function formatClinicsDetail(clinics) {
+  if (clinics.length === 0) return null;
+  return clinics.map((c) => `${c.name} – ${c.neighborhood}, ${c.city} - ${c.state}`).join(' • ');
+}
+
 export default async function Hero() {
   const clinics = await getClinicsForPublic();
   const cities = formatCities(clinics);
+  const clinicsDetail = formatClinicsDetail(clinics);
 
   return (
     <section className={styles.section}>
       <Container>
         <div className={styles.grid}>
           <Reveal x={-24} y={0} className={styles.content}>
-            <span className={styles.kicker}>Dermatologista em São Paulo e Belém</span>
+            <span className={styles.kicker}>Dermatologista{cities ? ` em ${cities}` : ''}</span>
             <h1 className={styles.title}>Dra. Rebecca Amorim</h1>
             <p className={styles.subhead}>
               Atuação na Dermatologia Clínica, Estética, Cirúrgica e Tricologia. Conduzidos com ética profissional e embasamento científico.
@@ -33,10 +39,10 @@ export default async function Hero() {
             <div className={styles.actions}>
               <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
             </div>
-            {cities && (
+            {clinicsDetail && (
               <span className={styles.tag}>
                 <MapPin size={16} strokeWidth={1.5} />
-                Atende em {cities}
+                {clinicsDetail}
               </span>
             )}
           </Reveal>

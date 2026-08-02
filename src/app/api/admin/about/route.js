@@ -27,7 +27,9 @@ export async function PATCH(request) {
     crm: body.crm,
     rqe: body.rqe,
     instagramUrl: body.instagramUrl,
+    instagramLabel: body.instagramLabel,
     lattesUrl: body.lattesUrl,
+    lattesLabel: body.lattesLabel,
   });
 
   revalidatePath('/');
