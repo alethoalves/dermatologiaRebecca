@@ -2,7 +2,8 @@ import Link from 'next/link';
 import Container from '@/components/ui/Container/Container';
 import Logo from '@/components/ui/Logo/Logo';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
-import { CLINIC } from '@/lib/constants';
+import { getClinicsForPublic } from '@/lib/clinics';
+import { getAboutContent } from '@/lib/about';
 import styles from './Footer.module.scss';
 
 const NAV_LINKS = [
@@ -12,8 +13,10 @@ const NAV_LINKS = [
   { href: '/blog', label: 'Blog' },
 ];
 
-export default function Footer() {
+export default async function Footer() {
   const year = new Date().getFullYear();
+  const [clinics, about] = await Promise.all([getClinicsForPublic(), getAboutContent()]);
+  const professionalMeta = [about.crm, about.rqe].filter(Boolean).join(' · ');
 
   return (
     <footer className={styles.footer}>
@@ -33,9 +36,14 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <span>
-            {CLINIC.name} — {CLINIC.address}, CEP {CLINIC.zip}
-          </span>
+          <div className={styles.addresses}>
+            {clinics.map((clinic) => (
+              <span key={clinic.id}>
+                {clinic.name} — {clinic.address}, CEP {clinic.zip}
+              </span>
+            ))}
+          </div>
+          {professionalMeta && <span>{professionalMeta}</span>}
           <span>© {year} Rebecca Perez de Amorim. Todos os direitos reservados.</span>
         </div>
       </Container>

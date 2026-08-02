@@ -15,6 +15,10 @@ const DEFAULTS = {
   ].join('\n\n'),
   photoUrl: '/images/photos/dra-rebecca-jaleco-1.jpg',
   photoAlt: 'Dra. Rebecca Amorim no consultório',
+  crm: null,
+  rqe: null,
+  instagramUrl: null,
+  lattesUrl: null,
 };
 
 export async function getAboutContent() {
@@ -23,11 +27,23 @@ export async function getAboutContent() {
   return db.aboutContent.create({ data: { id: SINGLETON_ID, ...DEFAULTS } });
 }
 
-export async function updateAboutContent({ kicker, name, intro, paragraphs, photoUrl, photoAlt }) {
+export async function updateAboutContent({
+  kicker,
+  name,
+  intro,
+  paragraphs,
+  photoUrl,
+  photoAlt,
+  crm,
+  rqe,
+  instagramUrl,
+  lattesUrl,
+}) {
+  const data = { kicker, name, intro, paragraphs, photoUrl, photoAlt, crm, rqe, instagramUrl, lattesUrl };
   return db.aboutContent.upsert({
     where: { id: SINGLETON_ID },
-    update: { kicker, name, intro, paragraphs, photoUrl, photoAlt },
-    create: { id: SINGLETON_ID, kicker, name, intro, paragraphs, photoUrl, photoAlt },
+    update: data,
+    create: { id: SINGLETON_ID, ...data },
   });
 }
 

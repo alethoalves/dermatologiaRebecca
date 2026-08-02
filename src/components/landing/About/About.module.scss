@@ -68,3 +68,24 @@
   background: var(--color-bg-muted);
   color: var(--color-ink);
 }
+
+.professionalMeta {
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-soft);
+}
+
+.socialLinks {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-soft);
+
+  &:hover {
+    color: var(--color-brand-deep);
+  }
+}

@@ -9,6 +9,7 @@ import styles from './AdminSidebar.module.scss';
 
 const NAV_LINKS = [
   { href: '/admin/about', label: 'Sobre' },
+  { href: '/admin/clinics', label: 'Endereços' },
   { href: '/admin/posts', label: 'Posts' },
   { href: '/admin/treatments', label: 'Tratamentos' },
   { href: '/admin/faq', label: 'Perguntas frequentes' },

@@ -16,6 +16,10 @@ export default function AboutForm({ about, credentials }) {
   const [paragraphs, setParagraphs] = useState(about?.paragraphs || '');
   const [photoUrl, setPhotoUrl] = useState(about?.photoUrl || null);
   const [photoAlt, setPhotoAlt] = useState(about?.photoAlt || '');
+  const [crm, setCrm] = useState(about?.crm || '');
+  const [rqe, setRqe] = useState(about?.rqe || '');
+  const [instagramUrl, setInstagramUrl] = useState(about?.instagramUrl || '');
+  const [lattesUrl, setLattesUrl] = useState(about?.lattesUrl || '');
   const [error, setError] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -34,7 +38,7 @@ export default function AboutForm({ about, credentials }) {
     }
 
     setIsSaving(true);
-    const payload = { kicker, name, intro, paragraphs, photoUrl, photoAlt };
+    const payload = { kicker, name, intro, paragraphs, photoUrl, photoAlt, crm, rqe, instagramUrl, lattesUrl };
 
     try {
       const res = await fetch('/api/admin/about', {
@@ -142,6 +146,46 @@ export default function AboutForm({ about, credentials }) {
       <div className={styles.field}>
         <label className={styles.label}>Credenciais</label>
         <CredentialsManager credentials={credentials} />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="crm">
+          CRM
+        </label>
+        <input id="crm" className={styles.input} value={crm} onChange={(e) => setCrm(e.target.value)} placeholder="CRM-SP 123456" />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="rqe">
+          RQE
+        </label>
+        <input id="rqe" className={styles.input} value={rqe} onChange={(e) => setRqe(e.target.value)} placeholder="RQE 12345" />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="instagramUrl">
+          Instagram
+        </label>
+        <input
+          id="instagramUrl"
+          className={styles.input}
+          value={instagramUrl}
+          onChange={(e) => setInstagramUrl(e.target.value)}
+          placeholder="https://instagram.com/..."
+        />
+      </div>
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="lattesUrl">
+          Currículo Lattes
+        </label>
+        <input
+          id="lattesUrl"
+          className={styles.input}
+          value={lattesUrl}
+          onChange={(e) => setLattesUrl(e.target.value)}
+          placeholder="http://lattes.cnpq.br/..."
+        />
       </div>
     </div>
   );

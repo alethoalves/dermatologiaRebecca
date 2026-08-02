@@ -6,10 +6,20 @@ import Container from '@/components/ui/Container/Container';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
 import Reveal from '@/components/motion/Reveal/Reveal';
 import Float from '@/components/motion/Float/Float';
-import { CLINIC } from '@/lib/constants';
+import { getClinicsForPublic } from '@/lib/clinics';
 import styles from './Hero.module.scss';
 
-export default function Hero() {
+function formatCities(clinics) {
+  const cities = [...new Set(clinics.map((c) => c.city))];
+  if (cities.length === 0) return null;
+  if (cities.length === 1) return cities[0];
+  return `${cities.slice(0, -1).join(', ')} e ${cities[cities.length - 1]}`;
+}
+
+export default async function Hero() {
+  const clinics = await getClinicsForPublic();
+  const cities = formatCities(clinics);
+
   return (
     <section className={styles.section}>
       <Container>
@@ -23,10 +33,12 @@ export default function Hero() {
             <div className={styles.actions}>
               <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
             </div>
-            <span className={styles.tag}>
-              <MapPin size={16} strokeWidth={1.5} />
-              {CLINIC.name} – {CLINIC.neighborhood}, {CLINIC.city} - {CLINIC.state}
-            </span>
+            {cities && (
+              <span className={styles.tag}>
+                <MapPin size={16} strokeWidth={1.5} />
+                Atende em {cities}
+              </span>
+            )}
           </Reveal>
 
           <Reveal delay={0.15} y={0} x={24} className={styles.visual}>

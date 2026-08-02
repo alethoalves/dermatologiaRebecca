@@ -1,36 +1,34 @@
 import { NextResponse } from 'next/server';
 import { revalidatePath } from 'next/cache';
 import { requireSession } from '@/lib/auth/require-session';
-import { getAboutContent, updateAboutContent } from '@/lib/about';
+import { getAllClinicsForAdmin, createClinic } from '@/lib/clinics';
 
 export async function GET() {
   const session = await requireSession();
   if (!session) return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
 
-  const about = await getAboutContent();
-  return NextResponse.json({ about });
+  const clinics = await getAllClinicsForAdmin();
+  return NextResponse.json({ clinics });
 }
 
-export async function PATCH(request) {
+export async function POST(request) {
   const session = await requireSession();
   if (!session) return NextResponse.json({ error: 'Não autorizado' }, { status: 401 });
 
   const body = await request.json();
 
-  const about = await updateAboutContent({
-    kicker: body.kicker,
+  const clinic = await createClinic({
     name: body.name,
-    intro: body.intro,
-    paragraphs: body.paragraphs,
-    photoUrl: body.photoUrl,
-    photoAlt: body.photoAlt,
-    crm: body.crm,
-    rqe: body.rqe,
-    instagramUrl: body.instagramUrl,
-    lattesUrl: body.lattesUrl,
+    neighborhood: body.neighborhood,
+    city: body.city,
+    state: body.state,
+    address: body.address,
+    zip: body.zip,
+    hours: body.hours,
+    note: body.note,
   });
 
   revalidatePath('/');
 
-  return NextResponse.json({ about });
+  return NextResponse.json({ clinic });
 }

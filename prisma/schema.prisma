@@ -87,14 +87,18 @@ model FaqItem {
 }
 
 model AboutContent {
-  id         String   @id @default("about")
-  kicker     String   @default("Sobre a")
-  name       String   @default("Dra. Rebecca Amorim")
-  intro      String   @db.Text
-  paragraphs String   @db.Text
-  photoUrl   String?
-  photoAlt   String?
-  updatedAt  DateTime @updatedAt
+  id           String   @id @default("about")
+  kicker       String   @default("Sobre a")
+  name         String   @default("Dra. Rebecca Amorim")
+  intro        String   @db.Text
+  paragraphs   String   @db.Text
+  photoUrl     String?
+  photoAlt     String?
+  crm          String?
+  rqe          String?
+  instagramUrl String?
+  lattesUrl    String?
+  updatedAt    DateTime @updatedAt
 }
 
 model Credential {
@@ -103,6 +107,23 @@ model Credential {
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([order])
+}
+
+model ClinicAddress {
+  id           String   @id @default(cuid())
+  name         String
+  neighborhood String
+  city         String
+  state        String
+  address      String
+  zip          String
+  hours        String   @db.Text
+  note         String?  @db.Text
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   @@index([order])
 }

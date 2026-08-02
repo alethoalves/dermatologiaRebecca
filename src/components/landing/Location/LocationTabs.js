@@ -1,34 +1,33 @@
+'use client';
+
 import { MapPin, Clock, Car } from 'lucide-react';
-import Container from '@/components/ui/Container/Container';
-import SectionHeading from '@/components/ui/SectionHeading/SectionHeading';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs/Tabs';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
-import Reveal from '@/components/motion/Reveal/Reveal';
-import { getClinicsForPublic, parseHours, buildMapSrc } from '@/lib/clinics';
-import LocationTabs from './LocationTabs';
+import { parseHours, buildMapSrc } from '@/lib/clinics/format';
 import styles from './Location.module.scss';
 
-export default async function Location() {
-  const clinics = await getClinicsForPublic();
-
-  if (clinics.length === 0) return null;
-
-  const single = clinics.length === 1 ? clinics[0] : null;
-
+export default function LocationTabs({ clinics }) {
   return (
-    <section id="localizacao" className={styles.section}>
-      <Container>
-        {single ? (
-          <div className={styles.grid}>
-            <Reveal className={styles.body}>
-              <SectionHeading kicker={single.name} title={`${single.neighborhood}, ${single.city}`} />
+    <Tabs defaultValue={clinics[0].id}>
+      <TabsList>
+        {clinics.map((clinic) => (
+          <TabsTrigger key={clinic.id} value={clinic.id}>
+            {clinic.city}
+          </TabsTrigger>
+        ))}
+      </TabsList>
 
+      {clinics.map((clinic) => (
+        <TabsContent key={clinic.id} value={clinic.id}>
+          <div className={styles.grid}>
+            <div className={styles.body}>
               <div className={styles.infoList}>
                 <div className={styles.infoItem}>
                   <MapPin size={20} strokeWidth={1.5} className={styles.infoIcon} />
                   <div>
                     <div className={styles.infoLabel}>Endereço</div>
                     <div className={styles.infoValue}>
-                      {single.address} — CEP {single.zip}
+                      {clinic.address} — CEP {clinic.zip}
                     </div>
                   </div>
                 </div>
@@ -38,7 +37,7 @@ export default async function Location() {
                   <div>
                     <div className={styles.infoLabel}>Horário de funcionamento</div>
                     <div className={styles.hours}>
-                      {parseHours(single.hours).map((h) => (
+                      {parseHours(clinic.hours).map((h) => (
                         <span key={h.label} className={styles.infoValue}>
                           {h.label}: {h.value}
                         </span>
@@ -53,32 +52,23 @@ export default async function Location() {
                 </div>
               </div>
 
-              {single.note && <p className={styles.note}>{single.note}</p>}
+              {clinic.note && <p className={styles.note}>{clinic.note}</p>}
 
               <WhatsAppButton variant="primary" />
-            </Reveal>
+            </div>
 
-            <Reveal delay={0.1} className={styles.mapWrap}>
+            <div className={styles.mapWrap}>
               <iframe
                 className={styles.map}
-                src={buildMapSrc(single)}
-                title={`Mapa — ${single.name}`}
+                src={buildMapSrc(clinic)}
+                title={`Mapa — ${clinic.name}`}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-            </Reveal>
+            </div>
           </div>
-        ) : (
-          <>
-            <Reveal>
-              <SectionHeading kicker="Onde atender" title="Nossos endereços" className={styles.heading} />
-            </Reveal>
-            <Reveal delay={0.1}>
-              <LocationTabs clinics={clinics} />
-            </Reveal>
-          </>
-        )}
-      </Container>
-    </section>
+        </TabsContent>
+      ))}
+    </Tabs>
   );
 }
