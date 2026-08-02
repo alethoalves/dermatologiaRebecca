@@ -16,15 +16,13 @@ function formatCities(clinics) {
   return `${cities.slice(0, -1).join(', ')} e ${cities[cities.length - 1]}`;
 }
 
-function formatClinicsDetail(clinics) {
-  if (clinics.length === 0) return null;
-  return clinics.map((c) => `${c.name} – ${c.neighborhood}, ${c.city} - ${c.state}`).join(' • ');
+function formatClinicDetail(clinic) {
+  return `${clinic.name} – ${clinic.neighborhood}, ${clinic.city} - ${clinic.state}`;
 }
 
 export default async function Hero() {
   const clinics = await getClinicsForPublic();
   const cities = formatCities(clinics);
-  const clinicsDetail = formatClinicsDetail(clinics);
 
   return (
     <section className={styles.section}>
@@ -39,11 +37,15 @@ export default async function Hero() {
             <div className={styles.actions}>
               <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
             </div>
-            {clinicsDetail && (
-              <span className={styles.tag}>
-                <MapPin size={16} strokeWidth={1.5} />
-                {clinicsDetail}
-              </span>
+            {clinics.length > 0 && (
+              <div className={styles.tags}>
+                {clinics.map((clinic) => (
+                  <span key={clinic.id} className={styles.tag}>
+                    <MapPin size={16} strokeWidth={1.5} />
+                    {formatClinicDetail(clinic)}
+                  </span>
+                ))}
+              </div>
             )}
           </Reveal>
 

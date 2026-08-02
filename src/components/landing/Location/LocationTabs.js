@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPin, Clock, Car } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs/Tabs';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
 import { parseHours, buildMapSrc } from '@/lib/clinics/format';
@@ -44,11 +44,6 @@ export default function LocationTabs({ clinics }) {
                       ))}
                     </div>
                   </div>
-                </div>
-
-                <div className={styles.infoItem}>
-                  <Car size={20} strokeWidth={1.5} className={styles.infoIcon} />
-                  <div className={styles.infoValue}>Estacionamento próprio no local</div>
                 </div>
               </div>
 

@@ -1,4 +1,4 @@
-import { MapPin, Clock, Car } from 'lucide-react';
+import { MapPin, Clock } from 'lucide-react';
 import Container from '@/components/ui/Container/Container';
 import SectionHeading from '@/components/ui/SectionHeading/SectionHeading';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
@@ -46,11 +46,6 @@ export default async function Location() {
                     </div>
                   </div>
                 </div>
-
-                <div className={styles.infoItem}>
-                  <Car size={20} strokeWidth={1.5} className={styles.infoIcon} />
-                  <div className={styles.infoValue}>Estacionamento próprio no local</div>
-                </div>
               </div>
 
               {single.note && <p className={styles.note}>{single.note}</p>}
@@ -71,7 +66,7 @@ export default async function Location() {
         ) : (
           <>
             <Reveal>
-              <SectionHeading kicker="Onde atender" title="Nossos endereços" className={styles.heading} />
+              <SectionHeading kicker="Agende sua consulta" title="Nossos endereços" className={styles.heading} />
             </Reveal>
             <Reveal delay={0.1}>
               <LocationTabs clinics={clinics} />
