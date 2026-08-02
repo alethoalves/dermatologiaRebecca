@@ -1,8 +1,11 @@
 import Image from 'next/image';
-import { MapPin, GraduationCap, Sparkles } from 'lucide-react';
+import { MapPin, Syringe } from 'lucide-react';
+import FaceMelasma from '@/components/icons/FaceMelasma';
+import HairStrand from '@/components/icons/HairStrand';
 import Container from '@/components/ui/Container/Container';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
 import Reveal from '@/components/motion/Reveal/Reveal';
+import Float from '@/components/motion/Float/Float';
 import { CLINIC } from '@/lib/constants';
 import styles from './Hero.module.scss';
 
@@ -12,12 +15,10 @@ export default function Hero() {
       <Container>
         <div className={styles.grid}>
           <Reveal x={-24} y={0} className={styles.content}>
-            <span className={styles.kicker}>Dermatologista em Belém e São Paulo</span>
+            <span className={styles.kicker}>Dermatologista em São Paulo e Belém</span>
             <h1 className={styles.title}>Dra. Rebecca Amorim</h1>
             <p className={styles.subhead}>
-              Dermatologia focada na trajetória e no cuidado global do paciente, com atendimento
-              individualizado e humano. Atuação nas áreas estética, clínica, cirúrgica e capilar de
-              forma especializada e com segurança médica.
+              Atuação na Dermatologia Clínica, Estética, Cirúrgica e Tricologia. Conduzidos com ética profissional e embasamento científico.
             </p>
             <div className={styles.actions}>
               <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
@@ -31,7 +32,7 @@ export default function Hero() {
           <Reveal delay={0.15} y={0} x={24} className={styles.visual}>
             <div className={styles.imageWrap}>
               <Image
-                src="/images/photos/dra-rebecca-retrato.jpg"
+                src="/images/photos/hero-photo.JPG"
                 alt="Dra. Rebecca Amorim"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
@@ -40,25 +41,26 @@ export default function Hero() {
               />
             </div>
 
-            <Reveal delay={0.45} y={12} className={`${styles.floatCard} ${styles.floatCardTop}`}>
+            <Float delay={0.45} y={12} floatDuration={3.2} className={`${styles.floatCard} ${styles.floatCardTop}`}>
               <span className={styles.floatIcon}>
-                <GraduationCap size={18} strokeWidth={1.5} />
+                <FaceMelasma size={18} />
               </span>
-              <div>
-                <strong>UNESP • SBD</strong>
-                <span>Residência médica e Sociedade Brasileira de Dermatologia</span>
-              </div>
-            </Reveal>
+              <strong>Melasma</strong>
+            </Float>
 
-            <Reveal delay={0.6} y={12} className={`${styles.floatCard} ${styles.floatCardBottom}`}>
+            <Float delay={0.55} y={12} floatDuration={3.6} className={`${styles.floatCard} ${styles.floatCardMiddle}`}>
               <span className={styles.floatIcon}>
-                <Sparkles size={18} strokeWidth={1.5} />
+                <Syringe size={18} strokeWidth={1.5} />
               </span>
-              <div>
-                <strong>Estética natural</strong>
-                <span>Resultados sutis, com respeito à individualidade</span>
-              </div>
-            </Reveal>
+              <strong>Procedimentos estéticos</strong>
+            </Float>
+
+            <Float delay={0.65} y={12} floatDuration={4} className={`${styles.floatCard} ${styles.floatCardBottom}`}>
+              <span className={styles.floatIcon}>
+                <HairStrand size={18} />
+              </span>
+              <strong>Tricologia</strong>
+            </Float>
           </Reveal>
         </div>
       </Container>

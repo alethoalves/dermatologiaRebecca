@@ -9,14 +9,14 @@
   :global(h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-xl);
-    font-weight: 500;
+    font-weight: var(--font-weight-light);
     margin-top: var(--space-4);
   }
 
   :global(h3) {
     font-family: var(--font-heading);
     font-size: var(--font-size-lg);
-    font-weight: 500;
+    font-weight: var(--font-weight-regular);
     margin-top: var(--space-3);
   }
 

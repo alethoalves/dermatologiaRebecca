@@ -1,4 +1,4 @@
-export const treatmentCategories = [
+module.exports.treatmentCategories = [
   {
     id: 'estetica',
     label: 'Dermatologia Estética',
@@ -186,10 +186,3 @@ export const treatmentCategories = [
     ],
   },
 ];
-
-export const ulcerasCronicas = {
-  id: 'ulceras-cronicas',
-  title: 'Tratamento de Úlceras Crônicas',
-  description:
-    'Cuidado com feridas que não cicatrizam, retirando tecido desvitalizado e orientando curativos adequados para o processo de cicatrização da ferida.',
-};

@@ -7,7 +7,11 @@ import Logo from '@/components/ui/Logo/Logo';
 import { signOutAction } from '@/lib/auth-actions';
 import styles from './AdminSidebar.module.scss';
 
-const NAV_LINKS = [{ href: '/admin/posts', label: 'Posts' }];
+const NAV_LINKS = [
+  { href: '/admin/posts', label: 'Posts' },
+  { href: '/admin/treatments', label: 'Tratamentos' },
+  { href: '/admin/faq', label: 'Perguntas frequentes' },
+];
 
 export default function AdminSidebar({ userName }) {
   const pathname = usePathname();

@@ -7,14 +7,18 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-normal);
 }
 
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
+  font-weight: var(--font-weight-light);
   line-height: var(--line-height-tight);
   letter-spacing: var(--tracking-tight);
   color: var(--color-brand-deep);

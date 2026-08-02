@@ -4,9 +4,7 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: linear-gradient(135deg, rgba(232, 234, 217, 0.82) 0%, rgba(233, 233, 218, 0.82) 100%);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
+  background: var(--color-cream);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -27,6 +25,13 @@
   }
 }
 
+.logoMark {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--color-brand-deep);
+}
+
 .nav {
   display: none;
 
@@ -43,7 +48,7 @@
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   font-weight: 500;
-  color: var(--color-ink-soft);
+  color: var(--color-brand-deep);
   transition: color 0.2s ease;
 
   &:hover {
@@ -91,5 +96,6 @@
 .mobileNavLink {
   font-family: var(--font-heading);
   font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
   color: var(--color-ink);
 }

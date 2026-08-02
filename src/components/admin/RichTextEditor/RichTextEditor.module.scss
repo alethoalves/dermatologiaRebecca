@@ -61,13 +61,13 @@
   :global(h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-xl);
-    font-weight: 500;
+    font-weight: var(--font-weight-light);
   }
 
   :global(h3) {
     font-family: var(--font-heading);
     font-size: var(--font-size-lg);
-    font-weight: 500;
+    font-weight: var(--font-weight-regular);
   }
 
   :global(ul),

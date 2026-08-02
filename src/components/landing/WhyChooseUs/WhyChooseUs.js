@@ -1,4 +1,3 @@
-import { GraduationCap, Stethoscope, Sparkles } from 'lucide-react';
 import Container from '@/components/ui/Container/Container';
 import SectionHeading from '@/components/ui/SectionHeading/SectionHeading';
 import Reveal from '@/components/motion/Reveal/Reveal';
@@ -7,19 +6,25 @@ import styles from './WhyChooseUs.module.scss';
 
 const PILLARS = [
   {
-    icon: GraduationCap,
-    title: 'Formação Sólida',
-    text: 'Graduação em Medicina pela Universidade do Estado do Pará (UEPA), com Residência Médica em Dermatologia pela Universidade Estadual Paulista (UNESP), Membra Titular da Sociedade Brasileira de Dermatologia (SBD).',
+    title: 'Formação e Atuação em Locais de Referência',
+    items: [
+      'Médica pela Universidade do Estado do Pará (UEPA)',
+      'Dermatologista pela Universidade Estadual Paulista (UNESP)',
+      <>
+        Mestra e Doutoranda pela UNESP, com ênfase em <strong>Melasma</strong>
+      </>,
+      'Tricologista pelo Hospital do Servidor Público Municipal (HSPM)',
+      'Preceptora do Fellow de Tricologia do HSPM',
+      'Titular da Sociedade Brasileira de Dermatologia (SBD)',
+    ],
   },
   {
-    icon: Stethoscope,
-    title: 'Atendimento Amplo',
-    text: 'Com competências que abrangem a dermatologia estética, clínica, cirúrgica e capilar. Tratamentos personalizados para diferentes necessidades.',
+    title: 'Beleza que Preserva a sua Identidade',
+    text: 'Procedimentos estéticos são indicados e realizados com o objetivo de realçar a beleza de forma natural, promovendo autoestima e confiança.',
   },
   {
-    icon: Sparkles,
-    title: 'Estética Natural',
-    text: 'Abordagem que busca resultados sutis e elegantes, com respeito à naturalidade e à individualidade.',
+    title: 'Cuidado Global ao Paciente',
+    text: 'Com competências que abrangem a dermatologia clínica, a estética, a cirurgia dermatológica e a tricologia, o atendimento busca resolver todas as necessidades da sua pele.',
   },
 ];
 
@@ -29,20 +34,25 @@ export default function WhyChooseUs() {
       <Container>
         <Reveal>
           <SectionHeading
-            kicker="Por que escolher a Dra. Rebecca?"
-            title="Cuidado dermatológico completo"
+            kicker="Cuidado dermatológico completo"
+            title="Por que escolher a Dra. Rebecca?"
             highlight="completo"
             className={styles.heading}
           />
         </Reveal>
         <StaggerGroup className={styles.grid}>
-          {PILLARS.map(({ icon: Icon, title, text }) => (
+          {PILLARS.map(({ title, text, items }) => (
             <StaggerItem key={title} className={styles.card}>
-              <span className={styles.iconWrap}>
-                <Icon size={22} strokeWidth={1.5} aria-hidden="true" />
-              </span>
               <h3 className={styles.cardTitle}>{title}</h3>
-              <p className={styles.cardText}>{text}</p>
+              {items ? (
+                <ul className={styles.cardList}>
+                  {items.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className={styles.cardText}>{text}</p>
+              )}
             </StaggerItem>
           ))}
         </StaggerGroup>

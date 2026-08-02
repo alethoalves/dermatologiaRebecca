@@ -5,7 +5,13 @@ import Image from 'next/image';
 import { ImagePlus, X } from 'lucide-react';
 import styles from './ImageUploader.module.scss';
 
-export default function ImageUploader({ value, onChange }) {
+export default function ImageUploader({
+  value,
+  onChange,
+  folder = 'posts',
+  label = 'Clique para enviar a imagem de capa (JPG, PNG ou WEBP, até 15MB)',
+  alt = 'Imagem enviada',
+}) {
   const inputRef = useRef(null);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,6 +26,7 @@ export default function ImageUploader({ value, onChange }) {
 
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('folder', folder);
 
     try {
       const res = await fetch('/api/admin/upload', { method: 'POST', body: formData });
@@ -37,7 +44,7 @@ export default function ImageUploader({ value, onChange }) {
     <div className={styles.wrap}>
       {value ? (
         <div className={styles.preview}>
-          <Image src={value} alt="Capa do post" fill sizes="400px" style={{ objectFit: 'cover' }} />
+          <Image src={value} alt={alt} fill sizes="400px" style={{ objectFit: 'cover' }} />
           <button type="button" className={styles.removeButton} onClick={() => onChange(null)} aria-label="Remover imagem">
             <X size={16} strokeWidth={1.5} />
           </button>
@@ -45,7 +52,7 @@ export default function ImageUploader({ value, onChange }) {
       ) : (
         <button type="button" className={styles.dropzone} onClick={() => inputRef.current?.click()} disabled={isUploading}>
           <ImagePlus size={22} strokeWidth={1.5} />
-          {isUploading ? 'Enviando…' : 'Clique para enviar a imagem de capa (JPG, PNG ou WEBP, até 15MB)'}
+          {isUploading ? 'Enviando…' : label}
         </button>
       )}
 

@@ -1,31 +1,30 @@
-'use client';
-
 import Container from '@/components/ui/Container/Container';
 import SectionHeading from '@/components/ui/SectionHeading/SectionHeading';
 import Reveal from '@/components/motion/Reveal/Reveal';
 import TreatmentExplorer from './TreatmentExplorer';
-import { treatmentCategories, ulcerasCronicas } from '@/data/treatments';
+import { getTreatmentCategoriesForPublic } from '@/lib/treatments';
 import styles from './Treatments.module.scss';
 
-export default function Treatments() {
+export default async function Treatments() {
+  const categories = await getTreatmentCategoriesForPublic();
+
   return (
     <section id="tratamentos" className={styles.section}>
       <Container>
         <Reveal>
           <SectionHeading
             kicker="Tratamentos oferecidos"
-            title="Aliando ciência, saúde e beleza no cuidado da sua pele"
-            highlight="beleza"
+            title="Aliando ciência, saúde e beleza no cuidado"
+            highlight="saúde e beleza"
             className={styles.heading}
           />
         </Reveal>
 
-        <TreatmentExplorer categories={treatmentCategories} />
-
-        <Reveal className={styles.ulceras}>
-          <h3 className={styles.ulcerasTitle}>{ulcerasCronicas.title}</h3>
-          <p className={styles.ulcerasText}>{ulcerasCronicas.description}</p>
-        </Reveal>
+        {categories.length > 0 ? (
+          <TreatmentExplorer categories={categories} />
+        ) : (
+          <p className={styles.empty}>Em breve, novos tratamentos por aqui.</p>
+        )}
       </Container>
     </section>
   );

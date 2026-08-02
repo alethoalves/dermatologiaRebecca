@@ -1,4 +1,4 @@
-export const faqItems = [
+module.exports.faqItems = [
   {
     id: 'primeira-consulta-necessaria',
     question: 'É necessário passar em primeira consulta mesmo quando eu já sei qual o procedimento gostaria de fazer?',

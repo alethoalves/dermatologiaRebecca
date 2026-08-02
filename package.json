@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "prisma migrate deploy && next start",
     "lint": "eslint",
+    "db:seed:content": "node prisma/seed-content.js",
     "postinstall": "prisma generate"
   },
   "dependencies": {

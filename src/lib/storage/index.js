@@ -12,6 +12,8 @@ const ALLOWED_MIME_TO_EXT = {
 
 const MAX_SIZE_BYTES = 15 * 1024 * 1024;
 
+export const ALLOWED_UPLOAD_FOLDERS = ['posts', 'treatments'];
+
 function getDriver() {
   const name = process.env.STORAGE_DRIVER || 'local';
   const driver = DRIVERS[name];
@@ -20,6 +22,10 @@ function getDriver() {
 }
 
 export async function uploadImage(file, { folder = 'posts' } = {}) {
+  if (!ALLOWED_UPLOAD_FOLDERS.includes(folder)) {
+    throw new Error('Pasta de upload inválida.');
+  }
+
   const ext = ALLOWED_MIME_TO_EXT[file.type];
   if (!ext) {
     throw new Error('Tipo de imagem não suportado. Envie um arquivo JPG, PNG ou WEBP.');
