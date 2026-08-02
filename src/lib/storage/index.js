@@ -12,7 +12,7 @@ const ALLOWED_MIME_TO_EXT = {
 
 const MAX_SIZE_BYTES = 15 * 1024 * 1024;
 
-export const ALLOWED_UPLOAD_FOLDERS = ['posts', 'treatments'];
+export const ALLOWED_UPLOAD_FOLDERS = ['posts', 'treatments', 'about'];
 
 function getDriver() {
   const name = process.env.STORAGE_DRIVER || 'local';
