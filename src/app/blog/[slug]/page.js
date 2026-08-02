@@ -22,9 +22,12 @@ export async function generateMetadata({ params }) {
     title: `${post.title} | Dra. Rebecca Amorim`,
     description: post.seoDescription || post.excerpt || undefined,
     openGraph: {
+      type: 'article',
+      url: `/blog/${slug}`,
       title: post.title,
       description: post.seoDescription || post.excerpt || undefined,
       images: post.coverImageUrl ? [post.coverImageUrl] : undefined,
+      publishedTime: post.publishedAt || undefined,
     },
   };
 }

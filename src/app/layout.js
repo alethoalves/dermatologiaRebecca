@@ -13,6 +13,12 @@ export const metadata = {
   title: 'Dra. Rebecca Amorim | Dermatologista em São Paulo e Belém',
   description:
     'Atuação na Dermatologia Clínica, Estética, Cirúrgica e Tricologia. Conduzidos com ética profissional e embasamento científico.',
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Dra. Rebecca Amorim',
+    locale: 'pt_BR',
+  },
 };
 
 export default function RootLayout({ children }) {
