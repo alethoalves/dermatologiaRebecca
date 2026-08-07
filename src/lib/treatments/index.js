@@ -101,6 +101,13 @@ export async function getTreatmentsByCategoryId(categoryId) {
   return db.treatment.findMany({ where: { categoryId }, orderBy: { order: 'asc' } });
 }
 
+export async function getAllTreatmentsForAdmin() {
+  return db.treatment.findMany({
+    include: { category: { select: { id: true, label: true } } },
+    orderBy: [{ category: { order: 'asc' } }, { order: 'asc' }],
+  });
+}
+
 export async function createTreatment({ categoryId, title, slug, description, imageUrl, imageAlt }) {
   const category = await db.treatmentCategory.findUnique({ where: { id: categoryId } });
   if (!category) throw new Error('Categoria não encontrada');
@@ -121,14 +128,20 @@ export async function createTreatment({ categoryId, title, slug, description, im
   });
 }
 
-export async function updateTreatment(id, { title, slug, description, imageUrl, imageAlt }) {
+export async function updateTreatment(id, { categoryId, title, slug, description, imageUrl, imageAlt }) {
   const current = await db.treatment.findUnique({ where: { id } });
   if (!current) throw new Error('Tratamento não encontrado');
 
   const baseSlug = slugify(slug || current.slug);
   const uniqueSlug = baseSlug === current.slug ? current.slug : await ensureUniqueTreatmentSlug(baseSlug, id);
 
-  return db.treatment.update({
+  const categoryChanged = !!categoryId && categoryId !== current.categoryId;
+  if (categoryChanged) {
+    const category = await db.treatmentCategory.findUnique({ where: { id: categoryId } });
+    if (!category) throw new Error('Categoria não encontrada');
+  }
+
+  const updated = await db.treatment.update({
     where: { id },
     data: {
       title,
@@ -136,8 +149,15 @@ export async function updateTreatment(id, { title, slug, description, imageUrl, 
       description,
       imageUrl: imageUrl || null,
       imageAlt: imageAlt || null,
+      ...(categoryChanged ? { categoryId, order: await nextOrderValue('treatment', { categoryId }) } : {}),
     },
   });
+
+  if (categoryChanged) {
+    await normalizeOrder('treatment', { categoryId: current.categoryId });
+  }
+
+  return updated;
 }
 
 export async function deleteTreatment(id) {

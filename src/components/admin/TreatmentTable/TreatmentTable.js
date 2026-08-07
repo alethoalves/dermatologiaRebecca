@@ -10,7 +10,7 @@ import Button from '@/components/ui/Button/Button';
 import OrderControls from '@/components/admin/OrderControls/OrderControls';
 import styles from './TreatmentTable.module.scss';
 
-export default function TreatmentTable({ category, treatments }) {
+export default function TreatmentTable({ treatments }) {
   const router = useRouter();
   const [treatmentToDelete, setTreatmentToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -32,19 +32,19 @@ export default function TreatmentTable({ category, treatments }) {
 
   return (
     <div>
-      <Link href="/admin/treatments" className={styles.backLink}>
+      <Link href="/admin/treatment-categories" className={styles.backLink}>
         <ArrowLeft size={16} strokeWidth={1.5} />
-        Categorias
+        Gerenciar categorias
       </Link>
 
       <div className={styles.header}>
-        <h1 className={styles.title}>{category.label}</h1>
-        <Button href={`/admin/treatments/${category.id}/items/new`}>Novo tratamento</Button>
+        <h1 className={styles.title}>Tratamentos</h1>
+        <Button href="/admin/treatments/new">Novo tratamento</Button>
       </div>
 
       <div className={styles.tableWrap}>
         {treatments.length === 0 ? (
-          <p className={styles.empty}>Nenhum tratamento cadastrado nesta categoria.</p>
+          <p className={styles.empty}>Nenhum tratamento cadastrado.</p>
         ) : (
           <table className={styles.table}>
             <thead>
@@ -52,49 +52,55 @@ export default function TreatmentTable({ category, treatments }) {
                 <th></th>
                 <th></th>
                 <th>Título</th>
+                <th>Categoria</th>
                 <th>Descrição</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {treatments.map((treatment, index) => (
-                <tr key={treatment.id}>
-                  <td>
-                    <OrderControls
-                      endpoint={`/api/admin/treatments/${treatment.id}/move`}
-                      isFirst={index === 0}
-                      isLast={index === treatments.length - 1}
-                    />
-                  </td>
-                  <td>
-                    {treatment.imageUrl ? (
-                      <div className={styles.thumb}>
-                        <Image
-                          src={treatment.imageUrl}
-                          alt={treatment.imageAlt || treatment.title}
-                          fill
-                          sizes="48px"
-                          style={{ objectFit: 'cover' }}
-                        />
+              {treatments.map((treatment, index) => {
+                const isFirst = index === 0 || treatments[index - 1].categoryId !== treatment.categoryId;
+                const isLast = index === treatments.length - 1 || treatments[index + 1].categoryId !== treatment.categoryId;
+                return (
+                  <tr key={treatment.id}>
+                    <td>
+                      <OrderControls
+                        endpoint={`/api/admin/treatments/${treatment.id}/move`}
+                        isFirst={isFirst}
+                        isLast={isLast}
+                      />
+                    </td>
+                    <td>
+                      {treatment.imageUrl ? (
+                        <div className={styles.thumb}>
+                          <Image
+                            src={treatment.imageUrl}
+                            alt={treatment.imageAlt || treatment.title}
+                            fill
+                            sizes="48px"
+                            style={{ objectFit: 'cover' }}
+                          />
+                        </div>
+                      ) : (
+                        <div className={styles.thumbPlaceholder}>—</div>
+                      )}
+                    </td>
+                    <td className={styles.treatmentTitle}>{treatment.title}</td>
+                    <td>{treatment.category.label}</td>
+                    <td className={styles.description}>{treatment.description}</td>
+                    <td>
+                      <div className={styles.actions}>
+                        <Link href={`/admin/treatments/${treatment.id}/edit`} className={styles.actionLink}>
+                          Editar
+                        </Link>
+                        <button type="button" className={styles.deleteButton} onClick={() => setTreatmentToDelete(treatment)}>
+                          Excluir
+                        </button>
                       </div>
-                    ) : (
-                      <div className={styles.thumbPlaceholder}>—</div>
-                    )}
-                  </td>
-                  <td className={styles.treatmentTitle}>{treatment.title}</td>
-                  <td className={styles.description}>{treatment.description}</td>
-                  <td>
-                    <div className={styles.actions}>
-                      <Link href={`/admin/treatments/${category.id}/items/${treatment.id}/edit`} className={styles.actionLink}>
-                        Editar
-                      </Link>
-                      <button type="button" className={styles.deleteButton} onClick={() => setTreatmentToDelete(treatment)}>
-                        Excluir
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}

@@ -7,10 +7,11 @@ import ImageUploader from '@/components/admin/ImageUploader/ImageUploader';
 import { slugify } from '@/lib/slugify';
 import styles from './TreatmentForm.module.scss';
 
-export default function TreatmentForm({ categoryId, treatment }) {
+export default function TreatmentForm({ categories, treatment }) {
   const router = useRouter();
   const isEditing = !!treatment;
 
+  const [categoryId, setCategoryId] = useState(treatment?.categoryId || categories[0]?.id || '');
   const [title, setTitle] = useState(treatment?.title || '');
   const [slug, setSlug] = useState(treatment?.slug || '');
   const [slugTouched, setSlugTouched] = useState(isEditing);
@@ -28,6 +29,10 @@ export default function TreatmentForm({ categoryId, treatment }) {
   async function handleSave() {
     setError(null);
 
+    if (!categoryId) {
+      setError('Selecione uma categoria para o tratamento.');
+      return;
+    }
     if (!title.trim()) {
       setError('Informe um título para o tratamento.');
       return;
@@ -49,7 +54,7 @@ export default function TreatmentForm({ categoryId, treatment }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Falha ao salvar o tratamento');
 
-      router.push(`/admin/treatments/${categoryId}`);
+      router.push('/admin/treatments');
       router.refresh();
     } catch (err) {
       setError(err.message);
@@ -69,6 +74,24 @@ export default function TreatmentForm({ categoryId, treatment }) {
       </div>
 
       {error && <p className={styles.error}>{error}</p>}
+
+      <div className={styles.field}>
+        <label className={styles.label} htmlFor="categoryId">
+          Categoria
+        </label>
+        <select
+          id="categoryId"
+          className={styles.input}
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+        >
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.label}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div className={styles.field}>
         <label className={styles.label} htmlFor="title">
@@ -115,7 +138,6 @@ export default function TreatmentForm({ categoryId, treatment }) {
       <div className={styles.field}>
         <label className={styles.label}>Foto (opcional)</label>
         <ImageUploader value={imageUrl} onChange={setImageUrl} folder="treatments" alt={imageAlt || title} />
-        <span className={styles.hint}>Se não enviar uma foto, a foto da categoria é usada no lugar.</span>
       </div>
 
       <div className={styles.field}>

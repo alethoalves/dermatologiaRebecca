@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: '/admin/clinics', label: 'Endereços' },
   { href: '/admin/posts', label: 'Posts' },
   { href: '/admin/treatments', label: 'Tratamentos' },
+  { href: '/admin/treatment-categories', label: 'Categorias de tratamento' },
   { href: '/admin/faq', label: 'Perguntas frequentes' },
 ];
 

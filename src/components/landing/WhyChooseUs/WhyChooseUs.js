@@ -6,7 +6,7 @@ import styles from './WhyChooseUs.module.scss';
 
 const PILLARS = [
   {
-    title: 'Formação e Atuação em Locais de Referência',
+    title: 'Qualificação Profissional',
     items: [
       'Médica pela Universidade do Estado do Pará (UEPA)',
       'Dermatologista pela Universidade Estadual Paulista (UNESP)',
@@ -20,11 +20,11 @@ const PILLARS = [
   },
   {
     title: 'Beleza que Preserva a sua Identidade',
-    text: 'Procedimentos estéticos são indicados e realizados com o objetivo de realçar a beleza de forma natural, promovendo autoestima e confiança.',
+    text: 'Os procedimentos estéticos são indicados e realizados com o objetivo de realçar a beleza de forma natural, trazendo resultados elegantes e promovendo autoestima e confiança.',
   },
   {
-    title: 'Cuidado Global ao Paciente',
-    text: 'Com competências que abrangem a dermatologia clínica, a estética, a cirurgia dermatológica e a tricologia, o atendimento busca resolver todas as necessidades da sua pele.',
+    title: 'Cuidado Integral',
+    text: 'Com atuação na dermatologia clínica, estética, cirurgia dermatológica e tricologia, o atendimento é conduzido de forma abrangente e individualizada, considerando as necessidades de cada paciente.',
   },
 ];
 
@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
       <Container>
         <Reveal>
           <SectionHeading
-            kicker="Cuidado dermatológico completo"
+            kicker="Nossos diferenciais"
             title={
               <>
                 Por que escolher a <br /> Dra. Rebecca?

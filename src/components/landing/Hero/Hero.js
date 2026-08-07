@@ -32,8 +32,7 @@ export default async function Hero() {
             <span className={styles.kicker}>Dermatologista{cities ? ` em ${cities}` : ''}</span>
             <h1 className={styles.title}>Dra. Rebecca Amorim</h1>
             <p className={styles.subhead}>
-              Atuação na Dermatologia Clínica, Estética, Cirúrgica e Tricologia. Conduzidos com ética profissional e embasamento científico.
-            </p>
+Dermatologia Clínica, Estética, Cirúrgica e Tricologia. Com ética profissional e embasamento científico.            </p>
             <div className={styles.actions}>
               <WhatsAppButton variant="primary">Agende sua consulta</WhatsAppButton>
             </div>

@@ -22,6 +22,7 @@ export async function PATCH(request, { params }) {
   const body = await request.json();
 
   const treatment = await updateTreatment(id, {
+    categoryId: body.categoryId,
     title: body.title,
     slug: body.slug,
     description: body.description,

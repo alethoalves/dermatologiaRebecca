@@ -31,8 +31,8 @@ export default function TreatmentCategoryTable({ categories }) {
   return (
     <div>
       <div className={styles.header}>
-        <h1 className={styles.title}>Tratamentos</h1>
-        <Button href="/admin/treatments/new">Nova categoria</Button>
+        <h1 className={styles.title}>Categorias de tratamento</h1>
+        <Button href="/admin/treatment-categories/new">Nova categoria</Button>
       </div>
 
       <div className={styles.tableWrap}>
@@ -62,10 +62,7 @@ export default function TreatmentCategoryTable({ categories }) {
                   <td>{category._count.treatments}</td>
                   <td>
                     <div className={styles.actions}>
-                      <Link href={`/admin/treatments/${category.id}`} className={styles.actionLink}>
-                        Gerenciar tratamentos
-                      </Link>
-                      <Link href={`/admin/treatments/${category.id}/edit`} className={styles.actionLink}>
+                      <Link href={`/admin/treatment-categories/${category.id}/edit`} className={styles.actionLink}>
                         Editar
                       </Link>
                       <button type="button" className={styles.deleteButton} onClick={() => setCategoryToDelete(category)}>

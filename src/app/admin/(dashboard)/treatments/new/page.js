@@ -1,7 +1,9 @@
-import TreatmentCategoryForm from '@/components/admin/TreatmentCategoryForm/TreatmentCategoryForm';
+import TreatmentForm from '@/components/admin/TreatmentForm/TreatmentForm';
+import { getAllTreatmentCategoriesForAdmin } from '@/lib/treatments';
 
-export const metadata = { title: 'Nova categoria | Admin' };
+export const metadata = { title: 'Novo tratamento | Admin' };
 
-export default function NewTreatmentCategoryPage() {
-  return <TreatmentCategoryForm />;
+export default async function NewTreatmentPage() {
+  const categories = await getAllTreatmentCategoriesForAdmin();
+  return <TreatmentForm categories={categories} />;
 }

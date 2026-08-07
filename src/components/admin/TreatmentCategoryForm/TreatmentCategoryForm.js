@@ -44,7 +44,7 @@ export default function TreatmentCategoryForm({ category }) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Falha ao salvar a categoria');
 
-      router.push('/admin/treatments');
+      router.push('/admin/treatment-categories');
       router.refresh();
     } catch (err) {
       setError(err.message);
