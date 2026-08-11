@@ -14,9 +14,18 @@
   padding-block: var(--space-2);
 }
 
-.slide {
-  height: clamp(240px, 34vw, 420px);
+// Sobrescreve o width/height: 100% padrão do .swiper-slide (swiper/css) com
+// especificidade maior, para o slide assumir a proporção real da foto.
+:global(.swiper-slide).slide {
   width: auto;
+  height: auto;
+  max-height: clamp(360px, 100vw, 480px);
+  max-width: min(560px, 82vw);
+
+  @include bp.respond(bp.$bp-md) {
+    max-height: clamp(240px, 34vw, 420px);
+    max-width: min(640px, 64vw);
+  }
 }
 
 .frame {
@@ -26,18 +35,16 @@
   border-radius: var(--radius-xl);
   overflow: hidden;
   background: var(--color-bg-muted);
-  box-shadow: var(--shadow-sm);
   opacity: 0.5;
   filter: blur(2px) saturate(0.85);
   transform: scale(0.94);
-  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
 }
 
 :global(.swiper-slide-active) .frame {
   opacity: 1;
   filter: none;
   transform: scale(1);
-  box-shadow: var(--shadow-lg);
 }
 
 .image {

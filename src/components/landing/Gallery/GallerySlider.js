@@ -22,6 +22,7 @@ export default function GallerySlider({ images }) {
         <Swiper
           modules={[Navigation, Pagination, Autoplay, A11y, Keyboard]}
           className={styles.swiper}
+          autoHeight
           centeredSlides
           loop={images.length > 1}
           grabCursor
