@@ -16,8 +16,8 @@ export async function POST(request) {
   const folder = formData.get('folder') || 'posts';
 
   try {
-    const { url, key } = await uploadImage(file, { folder });
-    return NextResponse.json({ url, key });
+    const { url, key, width, height } = await uploadImage(file, { folder });
+    return NextResponse.json({ url, key, width, height });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }

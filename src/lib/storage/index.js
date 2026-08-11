@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { imageSize } from 'image-size';
 import * as localDriver from './drivers/local';
 import * as blobDriver from './drivers/blob';
 
@@ -12,7 +13,7 @@ const ALLOWED_MIME_TO_EXT = {
 
 const MAX_SIZE_BYTES = 15 * 1024 * 1024;
 
-export const ALLOWED_UPLOAD_FOLDERS = ['posts', 'treatments', 'about'];
+export const ALLOWED_UPLOAD_FOLDERS = ['posts', 'treatments', 'about', 'gallery'];
 
 function getDriver() {
   const name = process.env.STORAGE_DRIVER || 'local';
@@ -37,7 +38,16 @@ export async function uploadImage(file, { folder = 'posts' } = {}) {
   const buffer = Buffer.from(await file.arrayBuffer());
   const filename = `${randomUUID()}.${ext}`;
 
-  return getDriver().uploadImage(buffer, { folder, filename });
+  let dimensions = {};
+  try {
+    const { width, height } = imageSize(buffer);
+    dimensions = { width, height };
+  } catch {
+    // Segue sem as dimensões se o arquivo não puder ser lido (ex.: formato inesperado).
+  }
+
+  const uploaded = await getDriver().uploadImage(buffer, { folder, filename });
+  return { ...uploaded, ...dimensions };
 }
 
 export async function deleteImage(key) {

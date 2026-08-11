@@ -8,6 +8,7 @@ import styles from './ImageUploader.module.scss';
 export default function ImageUploader({
   value,
   onChange,
+  onMeta,
   folder = 'posts',
   label = 'Clique para enviar a imagem de capa (JPG, PNG ou WEBP, até 15MB)',
   alt = 'Imagem enviada',
@@ -33,6 +34,7 @@ export default function ImageUploader({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Falha ao enviar imagem');
       onChange(data.url);
+      if (onMeta) onMeta({ width: data.width, height: data.height });
     } catch (err) {
       setError(err.message);
     } finally {

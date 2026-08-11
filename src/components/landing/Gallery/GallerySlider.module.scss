@@ -1,0 +1,111 @@
+@use '@/styles/breakpoints' as bp;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.viewportOuter {
+  position: relative;
+}
+
+.swiper {
+  padding-block: var(--space-2);
+}
+
+.slide {
+  height: clamp(240px, 34vw, 420px);
+  width: auto;
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--color-bg-muted);
+  box-shadow: var(--shadow-sm);
+  opacity: 0.5;
+  filter: blur(2px) saturate(0.85);
+  transform: scale(0.94);
+  transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+:global(.swiper-slide-active) .frame {
+  opacity: 1;
+  filter: none;
+  transform: scale(1);
+  box-shadow: var(--shadow-lg);
+}
+
+.image {
+  object-fit: contain;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-sm);
+  transition: background 0.2s ease;
+  z-index: 2;
+
+  &:hover {
+    background: var(--color-cream);
+  }
+}
+
+.arrowPrev {
+  left: var(--space-2);
+
+  @include bp.respond(bp.$bp-md) {
+    left: var(--space-5);
+  }
+}
+
+.arrowNext {
+  right: var(--space-2);
+
+  @include bp.respond(bp.$bp-md) {
+    right: var(--space-5);
+  }
+}
+
+.caption {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-soft);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-muted);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dotActive {
+  background: var(--color-brand);
+  transform: scale(1.25);
+}

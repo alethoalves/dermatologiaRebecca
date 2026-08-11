@@ -4,6 +4,7 @@ import WhyChooseUs from '@/components/landing/WhyChooseUs/WhyChooseUs';
 import Treatments from '@/components/landing/Treatments/Treatments';
 import Faq from '@/components/landing/Faq/Faq';
 import About from '@/components/landing/About/About';
+import Gallery from '@/components/landing/Gallery/Gallery';
 import BlogTeaser from '@/components/landing/BlogTeaser/BlogTeaser';
 import Location from '@/components/landing/Location/Location';
 import Footer from '@/components/landing/Footer/Footer';
@@ -23,6 +24,7 @@ export default async function Home() {
         <Treatments />
         <Faq />
         <About />
+        <Gallery />
         <BlogTeaser posts={posts} />
         <Location />
       </main>

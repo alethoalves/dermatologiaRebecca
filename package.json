@@ -22,6 +22,7 @@
     "@tiptap/react": "^3.29.2",
     "@tiptap/starter-kit": "^3.29.2",
     "bcryptjs": "^3.0.3",
+    "image-size": "^2.0.2",
     "lucide-react": "^1.27.0",
     "motion": "^12.43.0",
     "next": "16.2.12",
@@ -32,7 +33,8 @@
     "react-dom": "19.2.4",
     "sanitize-html": "^2.17.6",
     "sass": "^1.102.0",
-    "slugify": "^1.6.9"
+    "slugify": "^1.6.9",
+    "swiper": "^14.1.0"
   },
   "devDependencies": {
     "dotenv": "^17.4.2",
