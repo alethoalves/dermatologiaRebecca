@@ -17,13 +17,13 @@
 // Sobrescreve o width/height: 100% padrão do .swiper-slide (swiper/css) com
 // especificidade maior, para o slide assumir a proporção real da foto.
 :global(.swiper-slide).slide {
+  align-self: flex-start;
   width: auto;
-  height: auto;
-  max-height: clamp(360px, 100vw, 480px);
+  height: clamp(360px, 100vw, 480px);
   max-width: min(560px, 82vw);
 
   @include bp.respond(bp.$bp-md) {
-    max-height: clamp(240px, 34vw, 420px);
+    height: clamp(240px, 34vw, 420px);
     max-width: min(640px, 64vw);
   }
 }
