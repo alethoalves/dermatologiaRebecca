@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import Container from '@/components/ui/Container/Container';
-import LogoHorizontalMark from '@/components/ui/Logo/LogoHorizontalMark';
+import Logo from '@/components/ui/Logo/Logo';
 import WhatsAppButton from '@/components/ui/WhatsAppButton/WhatsAppButton';
 import styles from './Header.module.scss';
 
@@ -29,7 +29,7 @@ export default function Header() {
       <Container>
         <div className={styles.bar}>
           <Link href="/" className={styles.logoLink} onClick={() => setOpen(false)}>
-            <LogoHorizontalMark className={styles.logoMark} />
+            <Logo type="horizontal" tone="ink" className={styles.logoMark} priority />
           </Link>
 
           <nav className={styles.nav} aria-label="Navegação principal">
