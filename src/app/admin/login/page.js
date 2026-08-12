@@ -1,7 +1,6 @@
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
-import Logo from '@/components/ui/Logo/Logo';
 import Button from '@/components/ui/Button/Button';
 import styles from './page.module.scss';
 
@@ -30,7 +29,12 @@ export default async function AdminLoginPage({ searchParams }) {
   return (
     <div className={styles.wrap}>
       <div className={styles.card}>
-        <Logo type="horizontal" tone="ink" className={styles.logo} priority />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/images/brand/logo-final.svg"
+          alt="Rebecca Perez de Amorim — Dermatologista"
+          className={styles.logo}
+        />
         <h1 className={styles.title}>Painel administrativo</h1>
 
         {hasError && <p className={styles.error}>E-mail ou senha incorretos.</p>}
